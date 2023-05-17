@@ -94,25 +94,6 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  ListTile(
-                    title: Text('Recent Examinations'),
-                    onTap: () {
-                      // TODO: Handle navigation to recent examinations page
-                    },
-                  ),
-                  ListTile(
-                    title: Text('Recent Medicines'),
-                    onTap: () {
-                      // TODO: Handle navigation to recent medicines page
-                    },
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
