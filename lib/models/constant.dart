@@ -1,2 +1,2 @@
 
-const apiSecretKey = "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";
+const apiSecretKey = "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";

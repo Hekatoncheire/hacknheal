@@ -6,19 +6,21 @@ import '../models/DoctorModel.dart';
 class DoctorListPage extends StatelessWidget {
   final List<Doctor> doctors = [
     Doctor(
-      name: 'Dr. John Doe',
-      specialization: 'Cardiologist',
-      rating: 4.5,
-      hospital: 'ABC Hospital',
-      contactInfo: 'Phone: 123-456-7890\nEmail: john.doe@example.com',
-    ),
+        name: 'Dr. John Doe',
+        specialization: 'Cardiologist',
+        rating: 4.5,
+        hospital: 'ABC Hospital',
+        phoneNumber: '123-456-7890',
+        email: 'john.doe@example.com',
+        imagePath: 'lib/assets/images/john_doe_medik.jpeg'),
     Doctor(
-      name: 'Dr. Jane Smith',
-      specialization: 'Dermatologist',
-      rating: 4.8,
-      hospital: 'XYZ Hospital',
-      contactInfo: 'Phone: 987-654-3210\nEmail: jane.smith@example.com',
-    ),
+        name: 'Dr. Jane Smith',
+        specialization: 'Dermatologist',
+        rating: 4.8,
+        hospital: 'XYZ Hospital',
+        phoneNumber: '987-654-3210',
+        email: 'jane.smith@example.com',
+        imagePath: 'lib/assets/images/jane_smith_medik.jpeg'),
     // Add more doctors as needed
   ];
 
@@ -27,6 +29,7 @@ class DoctorListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Doctors List'),
+        backgroundColor: Colors.redAccent,
       ),
       body: ListView.builder(
         itemCount: doctors.length,

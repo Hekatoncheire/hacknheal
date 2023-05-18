@@ -66,6 +66,8 @@ flutter:
     - lib/assets/images/onboarding_1.jpg
     - lib/assets/images/onboarding_2.jpg
     - lib/assets/images/consultate.jpg
+    - lib/assets/images/john_doe_medik.jpeg
+    - lib/assets/images/jane_smith_medik.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -14,13 +14,14 @@ class DoctorDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Doctor Details'),
+        backgroundColor: Colors.redAccent,
       ),
       body: Column(
         children: [
           SizedBox(height: 16.0),
           CircleAvatar(
             radius: 60.0,
-            backgroundImage: AssetImage('assets/images/doctor_avatar.jpg'), // Replace with the actual image path
+            backgroundImage: AssetImage(doctor.imagePath), // Replace with the actual image path
           ),
           SizedBox(height: 16.0),
           Text(
@@ -54,12 +55,49 @@ class DoctorDetailPage extends StatelessWidget {
             'Contact Info:',
             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 8.0),
-          Text(
-            doctor.contactInfo,
-            style: TextStyle(fontSize: 16.0),
+          SizedBox(height: 30.0),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  spreadRadius: 5,
+                  blurRadius: 10,
+                  color: Colors.grey.withOpacity(0.3)
+                )
+              ]
+            ),
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 30),
+            margin: EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      doctor.phoneNumber,
+                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 24,),
+                    Text(
+                      doctor.email,
+                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    IconButton(onPressed: () {}, icon: Icon(Icons.phone), color: Colors.redAccent,),
+                    IconButton(onPressed: () {}, icon: Icon(Icons.mail), color: Colors.redAccent,)
+                  ],
+                )
+              ],
+            ),
           ),
-          SizedBox(height: 16.0),
+          SizedBox(height: 30.0),
           Text(
             'Reviews:',
             style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),

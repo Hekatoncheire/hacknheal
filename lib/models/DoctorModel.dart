@@ -3,13 +3,17 @@ class Doctor {
   final String specialization;
   final double rating;
   final String hospital;
-  final String contactInfo;
+  final String phoneNumber;
+  final String email;
+  final String imagePath;
 
   Doctor({
     required this.name,
     required this.specialization,
     required this.rating,
     required this.hospital,
-    required this.contactInfo,
+    required this.phoneNumber,
+    required this.email,
+    required this.imagePath,
   });
 }
