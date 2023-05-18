@@ -14,6 +14,8 @@ class _HomePageState extends State<HomePage> {
   DateTime _focusedDay = DateTime.now();
 
   int _selectedIndex = -1;
+  int _appointmentIndex = 0;
+  int selectedValueIndex = 0;
 
   List<String> timePoints = [
     '9:00 AM',
@@ -28,6 +30,23 @@ class _HomePageState extends State<HomePage> {
     '6:00 PM',
     '7:00 PM',
     '8:00 PM',
+  ];
+  List<bool> doctorSelectedValues = List.filled(5, false);
+  List<bool> placeSelectedValues = List.filled(5, false);
+
+  List<String> _doctorTypes = [
+    'Cardiologist',
+    'Dermatologist',
+    'Pulmonologist',
+    'Urologist',
+    'Other'
+  ];
+  List<String> _places = [
+    'Budapest',
+    'London',
+    'Paris',
+    'New York',
+    'Any'
   ];
   final List<Examination> examinations = [
     Examination(
@@ -52,7 +71,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('HealthApp'),
+        title: Text('Medik'),
         backgroundColor: Color.fromRGBO(145, 186, 79, 1),
       ),
       drawer: Drawer(
@@ -68,14 +87,16 @@ class _HomePageState extends State<HomePage> {
               title: Text('Consultancy'),
               onTap: () {
                 // TODO: Handle navigation to consultancy page
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ChatPage()));
               },
             ),
             ListTile(
               title: Text('Doctors'),
               onTap: () {
                 // TODO: handle navigation to the doctors page
-                Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorListPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DoctorListPage()));
               },
             )
             // Add more drawer items as needed
@@ -90,98 +111,168 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: EdgeInsets.only(top: 30.0, left: 16, right: 16),
                 child: Text(
-                  'Appointments',
+                  'Book an appointment',
                   style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.all(16.0),
-                child: TableCalendar(
-                  calendarFormat: _calendarFormat,
-                  focusedDay: _focusedDay,
-                  firstDay: DateTime(2023),
-                  lastDay: DateTime(2024),
-                  selectedDayPredicate: (day) {
-                    return isSameDay(_selectedDay, day);
-                  },
-                  onDaySelected: (selectedDay, focusedDay) {
-                    if (selectedDay.isBefore(DateTime.now().subtract(Duration(days: 1)))) {
-                      // Disable selection for days before the current day
-                      return;
-                    }
+              Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: _appointmentIndex == 0
+                        ? Column(
+                            children: List<Widget>.generate(_doctorTypes.length,
+                                (index) {
+                            return CheckboxListTile(
+                              title: Text(_doctorTypes[index]),
+                              value: doctorSelectedValues[index],
+                              onChanged: (value) {
+                                setState(() {
+                                  doctorSelectedValues[index] = value!;
+                                });
+                              },
+                            );
+                          }))
+                        : _appointmentIndex == 1
+                            ? Column(
+                                children: List<Widget>.generate(
+                                    _places.length, (index) {
+                                return CheckboxListTile(
+                                  title: Text(_places[index]),
+                                  value: placeSelectedValues[index],
+                                  onChanged: (value) {
+                                    setState(() {
+                                      placeSelectedValues[index] = value!;
+                                    });
+                                  },
+                                );
+                              }))
+                            : Column(
+                                children: [
+                                  TableCalendar(
+                                    calendarFormat: _calendarFormat,
+                                    focusedDay: _focusedDay,
+                                    firstDay: DateTime(2023),
+                                    lastDay: DateTime(2024),
+                                    selectedDayPredicate: (day) {
+                                      return isSameDay(_selectedDay, day);
+                                    },
+                                    onDaySelected: (selectedDay, focusedDay) {
+                                      if (selectedDay.isBefore(DateTime.now()
+                                          .subtract(Duration(days: 1)))) {
+                                        // Disable selection for days before the current day
+                                        return;
+                                      }
 
-                    setState(() {
-                      _selectedDay = selectedDay;
-                      _focusedDay = focusedDay;
-                    });
-                  },
-                  onPageChanged: (focusedDay) {
-                    _focusedDay = focusedDay;
-                  },
-                  onFormatChanged: (format) {
-                    setState(() {
-                      _calendarFormat = format;
-                    });
-                  },
-                  calendarStyle: CalendarStyle(
-                    // other style properties
-                    selectedDecoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color.fromRGBO(145, 186, 79, 1), // Set your desired color here
-                    ),
+                                      setState(() {
+                                        _selectedDay = selectedDay;
+                                        _focusedDay = focusedDay;
+                                      });
+                                    },
+                                    onPageChanged: (focusedDay) {
+                                      _focusedDay = focusedDay;
+                                    },
+                                    onFormatChanged: (format) {
+                                      setState(() {
+                                        _calendarFormat = format;
+                                      });
+                                    },
+                                    calendarStyle: CalendarStyle(
+                                      // other style properties
+                                      selectedDecoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Color.fromRGBO(145, 186, 79,
+                                            1), // Set your desired color here
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 20),
+                                  // Time points list
+                                  SizedBox(
+                                    height: 60,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: timePoints.length,
+                                      itemBuilder: (context, index) {
+                                        final timePoint = timePoints[index];
+                                        final isSelected =
+                                            index == _selectedIndex;
+
+                                        return GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              _selectedIndex = index;
+                                            });
+                                          },
+                                          child: Container(
+                                            width: 100,
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 8),
+                                            decoration: BoxDecoration(
+                                              color: isSelected
+                                                  ? Color.fromRGBO(
+                                                      145, 186, 79, 1)
+                                                  : Colors.grey
+                                                      .withOpacity(0.3),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                timePoint,
+                                                style: TextStyle(
+                                                  color: isSelected
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
                   ),
-                ),
-              ),
-              // Add appointment details section
-              SizedBox(height: 20),
-              // Time points list
-              SizedBox(
-                height: 60,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: timePoints.length,
-                  itemBuilder: (context, index) {
-                    final timePoint = timePoints[index];
-                    final isSelected = index == _selectedIndex;
-
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selectedIndex = index;
-                        });
-                      },
-                      child: Container(
-                        width: 100,
-                        margin: EdgeInsets.symmetric(horizontal: 8),
-                        decoration: BoxDecoration(
-                          color: isSelected ? Color.fromRGBO(145, 186, 79, 1) : Colors.grey.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Center(
-                          child: Text(
-                            timePoint,
-                            style: TextStyle(
-                              color: isSelected ? Colors.white : Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                  // Add appointment details section
+                ],
               ),
               SizedBox(height: 20),
               // Button for appointment detail
               Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Navigate to appointment detail page
-                  },
-                  child: Text('Book Appointment'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromRGBO(57, 99, 54, 1),
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Navigate to appointment detail page
+                        setState(() {
+                          _appointmentIndex >0 ? _appointmentIndex-- : _appointmentIndex=0;
+                        });
+                      },
+                      child:
+                      Text('Previous'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromRGBO(57, 99, 54, 1),
+                      ),
+                    ),
+                    SizedBox(width: 16,),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Navigate to appointment detail page
+                        setState(() {
+                          _appointmentIndex++;
+                        });
+                      },
+                      child:
+                          Text(_appointmentIndex < 2 ? 'Next' : 'Book appointment'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromRGBO(57, 99, 54, 1),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Padding(
@@ -201,19 +292,19 @@ class _HomePageState extends State<HomePage> {
                     final examination = examinations[index];
 
                     return Container(
-                      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                       margin: EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            offset: Offset(0, 2),
-                            blurRadius: 4,
-                          )
-                        ]
-                      ),
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              offset: Offset(0, 2),
+                              blurRadius: 4,
+                            )
+                          ]),
                       child: Center(
                         child: ListTile(
                           subtitle: Row(
@@ -221,14 +312,24 @@ class _HomePageState extends State<HomePage> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(examination.title, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20),),
-                                  SizedBox(height: 8,),
+                                  Text(
+                                    examination.title,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                        fontSize: 20),
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
                                   Text('Date: ${examination.date}'),
                                   SizedBox(height: 8),
                                   Text('Result: ${examination.result}'),
                                 ],
                               ),
-                              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward_ios))
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.arrow_forward_ios))
                             ],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -242,11 +343,12 @@ class _HomePageState extends State<HomePage> {
               ),
               Center(
                   child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text('View all history'),
-                    style: ElevatedButton.styleFrom(backgroundColor: Color.fromRGBO(57, 99, 54, 1),),
-                  )
-              )
+                onPressed: () {},
+                child: Text('View all history'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromRGBO(57, 99, 54, 1),
+                ),
+              ))
             ],
           ),
         ],

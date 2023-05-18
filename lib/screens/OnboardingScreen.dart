@@ -11,7 +11,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final List<OnboardingItem> onboardingItems = [
     OnboardingItem(
-      title: 'Welcome to HealthApp',
+      title: 'Welcome to Medik',
       description: 'Get personalized health insights and stay connected.',
       image: 'lib/assets/images/welcome.png',
     ),
