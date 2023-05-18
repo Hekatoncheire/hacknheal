@@ -37,6 +37,7 @@ dependencies:
   table_calendar: ^3.0.9
   http: ^0.13.5
   dart_openai: ^1.9.91
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

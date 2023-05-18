@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hack_heal/screens/ChatScreen.dart';
+import 'package:hack_heal/screens/DoctorsPage.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class HomePage extends StatefulWidget {
@@ -70,6 +71,13 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage()));
               },
             ),
+            ListTile(
+              title: Text('Doctors'),
+              onTap: () {
+                // TODO: handle navigation to the doctors page
+                Navigator.push(context, MaterialPageRoute(builder: (context) => DoctorListPage()));
+              },
+            )
             // Add more drawer items as needed
           ],
         ),

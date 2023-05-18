@@ -57,7 +57,6 @@ class _ChatPageState extends State<ChatPage> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        toolbarHeight: 100,
         title: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(
@@ -180,7 +179,7 @@ class ChatMessageWidget extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.all(16),
       color: chatMessageType == ChatMessageType.bot
-          ? Colors.grey
+          ? Colors.redAccent
           : Colors.transparent,
       child: Row(
         children: [
@@ -188,10 +187,10 @@ class ChatMessageWidget extends StatelessWidget {
               ? Container(
                   margin: EdgeInsets.only(right: 16),
                   child: CircleAvatar(
-                    backgroundColor: Colors.redAccent,
+                    backgroundColor: Colors.white,
                     child: Icon(
                       Icons.add_rounded,
-                      color: Colors.white,
+                      color: Colors.redAccent,
                     ),
                   ),
                 )
@@ -216,10 +215,15 @@ class ChatMessageWidget extends StatelessWidget {
                 ),
                 child: Text(
                   text,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(color: Colors.redAccent),
+                  style: chatMessageType == ChatMessageType.bot
+                      ? Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(color: Colors.white)
+                      : Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(color: Colors.redAccent),
                 ),
               )
             ],
