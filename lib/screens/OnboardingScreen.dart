@@ -13,17 +13,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     OnboardingItem(
       title: 'Welcome to HealthApp',
       description: 'Get personalized health insights and stay connected.',
-      image: 'lib/assets/images/onboarding_1.jpg',
+      image: 'lib/assets/images/welcome.png',
     ),
     OnboardingItem(
       title: 'Track Your Health',
       description: 'Monitor your vitals and keep records of your health data.',
-      image: 'lib/assets/images/onboarding_2.jpg',
+      image: 'lib/assets/images/onboarding_2.png',
     ),
     OnboardingItem(
       title: 'Consult with Experts',
       description: 'Connect with healthcare professionals for advice and support.',
-      image: 'lib/assets/images/consultate.jpg',
+      image: 'lib/assets/images/consultate.png',
     ),
   ];
 
@@ -66,7 +66,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ElevatedButton(
                     onPressed: goToNextScreen,
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.redAccent,
+                      backgroundColor: Color.fromRGBO(145, 186, 79, 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
@@ -83,10 +83,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   TextButton(
                     onPressed: () {
                       // Handle skip button click
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> AuthPage()));
                     },
                     child: Text(
                       'Skip',
-                      style: TextStyle(fontSize: 16.0, color: Colors.grey),
+                      style: TextStyle(fontSize: 16.0, color: Color.fromRGBO(57, 99, 54, 1),),
                     ),
                   ),
                 ],

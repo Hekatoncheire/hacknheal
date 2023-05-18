@@ -64,7 +64,7 @@ class _ChatPageState extends State<ChatPage> {
             textAlign: TextAlign.center,
           ),
         ),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Color.fromRGBO(145, 186, 79, 1),
       ),
       body: Column(
         children: [
@@ -76,7 +76,7 @@ class _ChatPageState extends State<ChatPage> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: CircularProgressIndicator(
-                color: Colors.redAccent,
+                color: Color.fromRGBO(145, 186, 79, 1),
               ),
             ),
           ),
@@ -118,7 +118,7 @@ class _ChatPageState extends State<ChatPage> {
           child: IconButton(
             icon: Icon(
               Icons.send_rounded,
-              color: Colors.redAccent,
+              color: Color.fromRGBO(57, 99, 54, 1),
             ),
             onPressed: () {
               setState(() {
@@ -179,7 +179,7 @@ class ChatMessageWidget extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.all(16),
       color: chatMessageType == ChatMessageType.bot
-          ? Colors.redAccent
+          ? Color.fromRGBO(57, 99, 54, 1)
           : Colors.transparent,
       child: Row(
         children: [
@@ -190,17 +190,17 @@ class ChatMessageWidget extends StatelessWidget {
                     backgroundColor: Colors.white,
                     child: Icon(
                       Icons.add_rounded,
-                      color: Colors.redAccent,
+                      color: Color.fromRGBO(57, 99, 54, 1),
                     ),
                   ),
                 )
               : Container(
                   margin: EdgeInsets.only(right: 16),
                   child: CircleAvatar(
-                    backgroundColor: Colors.white,
+                    backgroundColor: Color.fromRGBO(57, 99, 54, 1),
                     child: Icon(
                       Icons.person,
-                      color: Colors.redAccent,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -223,7 +223,7 @@ class ChatMessageWidget extends StatelessWidget {
                       : Theme.of(context)
                           .textTheme
                           .bodyLarge
-                          ?.copyWith(color: Colors.redAccent),
+                          ?.copyWith(color: Color.fromRGBO(57, 99, 54, 1)),
                 ),
               )
             ],

@@ -29,7 +29,7 @@ class DoctorListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Doctors List'),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Color.fromRGBO(145, 186, 79, 1),
       ),
       body: ListView.builder(
         itemCount: doctors.length,

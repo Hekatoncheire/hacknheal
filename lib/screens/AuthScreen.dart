@@ -78,7 +78,7 @@ class _AuthPageState extends State<AuthPage> {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> HomePage()));
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.redAccent,
+                backgroundColor: Color.fromRGBO(145, 186, 79, 1),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
@@ -101,7 +101,7 @@ class _AuthPageState extends State<AuthPage> {
                 style: TextStyle(fontSize: 16.0),
               ),
               style: TextButton.styleFrom(
-                primary: Colors.redAccent
+                primary: Color.fromRGBO(57, 99, 54, 1),
               ),
             ),
           ],

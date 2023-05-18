@@ -14,7 +14,7 @@ class DoctorDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Doctor Details'),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Color.fromRGBO(145, 186, 79, 1),
       ),
       body: Column(
         children: [
@@ -90,8 +90,8 @@ class DoctorDetailPage extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    IconButton(onPressed: () {}, icon: Icon(Icons.phone), color: Colors.redAccent,),
-                    IconButton(onPressed: () {}, icon: Icon(Icons.mail), color: Colors.redAccent,)
+                    IconButton(onPressed: () {}, icon: Icon(Icons.phone), color: Color.fromRGBO(57, 99, 54, 1),),
+                    IconButton(onPressed: () {}, icon: Icon(Icons.mail), color: Color.fromRGBO(57, 99, 54, 1),)
                   ],
                 )
               ],

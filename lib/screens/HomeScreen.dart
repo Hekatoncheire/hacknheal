@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('HealthApp'),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Color.fromRGBO(145, 186, 79, 1),
       ),
       drawer: Drawer(
         child: ListView(
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                     // other style properties
                     selectedDecoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.redAccent, // Set your desired color here
+                      color: Color.fromRGBO(145, 186, 79, 1), // Set your desired color here
                     ),
                   ),
                 ),
@@ -154,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                         width: 100,
                         margin: EdgeInsets.symmetric(horizontal: 8),
                         decoration: BoxDecoration(
-                          color: isSelected ? Colors.redAccent : Colors.grey.withOpacity(0.3),
+                          color: isSelected ? Color.fromRGBO(145, 186, 79, 1) : Colors.grey.withOpacity(0.3),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Center(
@@ -180,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: Text('Book Appointment'),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.redAccent,
+                    backgroundColor: Color.fromRGBO(57, 99, 54, 1),
                   ),
                 ),
               ),
@@ -244,7 +244,7 @@ class _HomePageState extends State<HomePage> {
                   child: ElevatedButton(
                     onPressed: () {},
                     child: Text('View all history'),
-                    style: ElevatedButton.styleFrom(primary: Colors.redAccent),
+                    style: ElevatedButton.styleFrom(backgroundColor: Color.fromRGBO(57, 99, 54, 1),),
                   )
               )
             ],
